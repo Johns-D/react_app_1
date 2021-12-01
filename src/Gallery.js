@@ -81,7 +81,7 @@ class Gallery extends React.Component {
                             <button className="back_btn btn"></button>
                             <div className="current">GALLERY</div>
                         </div>
-                        <button className="upload_btn btn"><i></i>UPLOAD</button>
+                        <button onClick={this.props.modalOpen} className="upload_btn btn"><i></i>UPLOAD</button>
                     </div>
                     <form className="gallery_form" action="">
                         <label className="order_label">
@@ -122,7 +122,7 @@ class Gallery extends React.Component {
                     </form>
                     <div className="img_pattern">
                         {this.state.response.map((dogItem) => (
-                            <div className="img_pattern_item">
+                            <div className="img_pattern_item" key={dogItem.id}>
                                 <img src={dogItem.url} alt="" />
                                 <div className="img_pattern_item_overlay"></div>
                                 <button className="img_pattern_item_favourite_btn btn"></button>

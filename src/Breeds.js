@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from './NavBar';
+import {NavLink} from 'react-router-dom';
 
 class Breeds extends React.Component {
     constructor(props) {
@@ -97,10 +98,10 @@ class Breeds extends React.Component {
                     </div>
                     <div className="img_pattern">
                         {this.state.breeds.map((breedsItem) => (
-                            <div className="img_pattern_item">
+                            <div className="img_pattern_item" key={breedsItem.id}>
                                 <img src={breedsItem.image.url} alt="" />
                                 <div className="img_pattern_item_overlay"></div>
-                                <a className="img_pattern_item_breed_link" href="#">{breedsItem.name}</a>
+                                <NavLink onClick={() => {this.props.getcurrentBreed(breedsItem.name)}} className="img_pattern_item_breed_link" to="/breed">{breedsItem.name}</NavLink>
                             </div>
                         ))}
                     </div>

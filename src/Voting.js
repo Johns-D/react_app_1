@@ -1,18 +1,24 @@
 import React from 'react';
 import NavBar from './NavBar';
-import voting_test_img from './img/test_img_1.png';
+import likeImg from './img/like_small.svg';
+import dislikeImg from './img/dislike_small.svg';
+import favouriteImg from './img/favourite_small.svg';
 
 class Voting extends React.Component {
     constructor(props) {
         super(props);
         this.state={
             img: {},
+            imgFavId: '',
             userActionLog: [],
+            favouritesLog: [],
         };
     };
 
     componentDidMount() {
         this.getData();
+        this.getVotes();
+        this.getFavourites();
     };
 
     getData(){
@@ -26,9 +32,11 @@ class Voting extends React.Component {
         })
         .then(img => img.json())
         .then(img => {
-            this.setState({img:img[0]})
+            this.setState({
+                img:img[0],
+                imgFavId: '',
+            })
         })
-        .then(() => this.getVotes())
     };
 
     createVote(value){
@@ -45,6 +53,44 @@ class Voting extends React.Component {
                 "image_id": this.state.img.id,
                 "value": value,
             }),
+        })
+    };
+
+    addToFavourite(){
+        let url = `https://api.thedogapi.com/v1/favourites`
+        fetch(url,{
+            method: "POST",
+            headers:{
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+                "content-type": "application/json",
+                "x-api-key": "b9a46af2-c82c-4c56-8df3-5d3a8b4c9b8b",
+            },
+            body: JSON.stringify({
+                "image_id": this.state.img.id
+            })
+        })
+        .then(response => response.json())
+        .then(response => {
+            this.setState({imgFavId:response.id})
+            console.log(response)
+        })
+    };
+
+    deleteFavourite() {
+        let url = `https://api.thedogapi.com/v1/favourites/${this.state.imgFavId}`
+        fetch(url,{
+            method: "DELETE",
+            headers:{
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+                "x-api-key": "b9a46af2-c82c-4c56-8df3-5d3a8b4c9b8b",
+            }
+        })
+        .then(response => response.json())
+        .then(response => {
+            this.setState({imgFavId: ''})
+            console.log(response)
         })
     };
 
@@ -65,7 +111,34 @@ class Voting extends React.Component {
         console.log(this.state);
     };
 
+    getFavourites() {
+        let url = `https://api.thedogapi.com/v1/favourites`
+        fetch(url,{
+            method: "GET",
+            headers:{
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+                "x-api-key": "b9a46af2-c82c-4c56-8df3-5d3a8b4c9b8b",
+            }
+        })
+        .then(favouritesLog => favouritesLog.json())
+        .then(favouritesLog => {
+            this.setState({favouritesLog:favouritesLog})
+        })
+    };
+
+    toggleFavourite() {
+        if (this.state.imgFavId) {
+            this.deleteFavourite();
+        } else {
+            this.addToFavourite();
+        };
+        this.getFavourites();
+    };
+
     render() {
+        let data = this.state.userActionLog.concat(this.state.favouritesLog);
+        data = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         return(
                 <div className="right voting">
                     <NavBar />
@@ -81,26 +154,45 @@ class Voting extends React.Component {
                                 <img src={this.state.img.url} alt="" />
                             </div>
                             <div className="voting_card_btn">
-                                <button onClick={(e) => {e.preventDefault(); this.createVote(1); this.getData()}} className="voting_card_like_btn btn"></button>
-                                <button className="voting_card_favourite_btn btn"></button>
-                                <button onClick={(e) => {e.preventDefault(); this.createVote(0); this.getData()}} className="voting_card_dislike_btn btn"></button>
+                                <button onClick={() => {this.createVote(1); this.getData(); this.getVotes()}} className="voting_card_like_btn btn"></button>
+                                <button onClick={() => {this.toggleFavourite()}} className="voting_card_favourite_btn btn"></button>
+                                <button onClick={() => {this.createVote(0); this.getData(); this.getVotes()}} className="voting_card_dislike_btn btn"></button>
                             </div>
-                            <button onClick={(e) => {e.preventDefault(); this.getVotes()}} className="btn">getVotes</button>
                         </div>
                         <div className="voting_log">
-                            {this.state.userActionLog.map((userAction) => (
-                                <div className="voting_log_item" key={userAction.id}>
-                                    <div className="voting_log_item_time">{userAction.created_at}</div>
-                                    <div className="voting_log_item_text">Image ID:</div>
-                                    <p className="voting_log_item_spacer"> </p>
-                                    <div className="voting_log_item_img_id">{userAction.image_id}</div>
-                                    <p className="voting_log_item_spacer"> </p>
-                                    <div className="voting_log_item_action">was added to</div>
-                                    <p className="voting_log_item_spacer"> </p>
-                                    <div className="voting_log_item_action_target">Favourites</div>
-                                    <div className="voting_log_item_img_favourites voting_log_item_img"></div>
-                                </div>
-                            ))}
+                            {data.map((userAction) => {
+                                let actionTagret = 'favourites';
+                                let imgSourse = favouriteImg;
+                                let date = new Date(userAction.created_at);
+                                let hours = date.getHours();
+                                let minutes = date.getMinutes();
+                                function zero(e) {
+                                    if (e < 10) {
+                                        return '0' + e;
+                                    }
+                                    return e;
+                                };
+                                if (userAction.value == 1) {
+                                    actionTagret = 'like';
+                                    imgSourse = likeImg;
+                                } else if (userAction.value == 0) {
+                                    actionTagret = 'dislike';
+                                    imgSourse = dislikeImg;
+                                };
+                                return(
+                                    <div className="voting_log_item" key={userAction.id}>
+                                        <div className="voting_log_item_time">{zero(hours) + ':' + zero(minutes)}</div>
+                                        <div className="voting_log_item_text">Image ID:</div>
+                                        <p className="voting_log_item_spacer"> </p>
+                                        <div className="voting_log_item_img_id">{userAction.image_id}</div>
+                                        <p className="voting_log_item_spacer"> </p>
+                                        <div className="voting_log_item_action">was added to</div>
+                                        <p className="voting_log_item_spacer"> </p>
+                                        <div className="voting_log_item_action_target">{actionTagret}</div>
+                                        <img src={imgSourse} className="voting_log_item_img" />
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>
