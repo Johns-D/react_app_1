@@ -79,7 +79,7 @@ class Breeds extends React.Component {
                             <label>
                                 <select onChange={this.changeBreed} name="breeds_breeds_select">
                                     <option value="">All breeds</option>
-                                    {this.state.breeds.map(breed => 
+                                    {this.state.breeds.map(breed =>
                                         <option key={breed.id} value={breed.id}>{breed.name}</option>
                                     )}
                                 </select>
@@ -101,7 +101,7 @@ class Breeds extends React.Component {
                             <div className="img_pattern_item" key={breedsItem.id}>
                                 <img src={breedsItem.image.url} alt="" />
                                 <div className="img_pattern_item_overlay"></div>
-                                <NavLink onClick={() => {this.props.getcurrentBreed(breedsItem.name)}} className="img_pattern_item_breed_link" to="/breed">{breedsItem.name}</NavLink>
+                                <NavLink onClick={() => {this.props.setCurrentBreed(breedsItem.name)}} className="img_pattern_item_breed_link" to="/breed">{breedsItem.name}</NavLink>
                             </div>
                         ))}
                     </div>

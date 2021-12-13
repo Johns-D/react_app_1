@@ -11,6 +11,16 @@ import Dislikes from './Dislikes';
 import {Routes, Route, NavLink} from "react-router-dom";
 
 class Main extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            currentBreed: '',
+        }
+        this.setCurrentBreed =  this.setCurrentBreed.bind(this)
+    }
+    setCurrentBreed(value) {
+		this.setState({currentBreed:value})
+	}
     render() {
         return(
             <div className="container">
@@ -47,8 +57,8 @@ class Main extends React.Component {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/voting" element={<Voting />} />
-                        <Route path="/breeds" element={<Breeds />} />
-                        <Route path="/breed" element={<Breed breedInfo={this.props.breedInfo} />} />
+                        <Route path="/breeds" element={<Breeds setCurrentBreed={this.setCurrentBreed} />} />
+                        <Route path="/breed" element={<Breed currentBreed={this.state.currentBreed}/>} />
                         <Route path="/gallery" element={<Gallery modalOpen={this.props.modalOpen} />} />
                         <Route path="/likes" element={<Likes />} />
                         <Route path="/favourites" element={<Favourites />} />
