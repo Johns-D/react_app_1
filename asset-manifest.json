@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/react_app_1/static/css/main.4f1cf6e5.chunk.css",
+    "main.js": "/react_app_1/static/js/main.cf50f9b7.chunk.js",
+    "main.js.map": "/react_app_1/static/js/main.cf50f9b7.chunk.js.map",
+    "runtime-main.js": "/react_app_1/static/js/runtime-main.bed49be6.js",
+    "runtime-main.js.map": "/react_app_1/static/js/runtime-main.bed49be6.js.map",
+    "static/js/2.216c1ef3.chunk.js": "/react_app_1/static/js/2.216c1ef3.chunk.js",
+    "static/js/2.216c1ef3.chunk.js.map": "/react_app_1/static/js/2.216c1ef3.chunk.js.map",
+    "static/js/3.83db790b.chunk.js": "/react_app_1/static/js/3.83db790b.chunk.js",
+    "static/js/3.83db790b.chunk.js.map": "/react_app_1/static/js/3.83db790b.chunk.js.map",
+    "index.html": "/react_app_1/index.html",
+    "static/css/main.4f1cf6e5.chunk.css.map": "/react_app_1/static/css/main.4f1cf6e5.chunk.css.map",
+    "static/js/2.216c1ef3.chunk.js.LICENSE.txt": "/react_app_1/static/js/2.216c1ef3.chunk.js.LICENSE.txt",
+    "static/media/style.css": "/react_app_1/static/media/vote-table.05f6be5b.svg",
+    "static/media/error.77d680b6.svg": "/react_app_1/static/media/error.77d680b6.svg",
+    "static/media/girl-and-pet.28d31ee8.png": "/react_app_1/static/media/girl-and-pet.28d31ee8.png",
+    "static/media/logo.f2bee3c2.svg": "/react_app_1/static/media/logo.f2bee3c2.svg",
+    "static/media/success.4a94fc5d.svg": "/react_app_1/static/media/success.4a94fc5d.svg",
+    "static/media/test_img_3.3b1aa75b.jpg": "/react_app_1/static/media/test_img_3.3b1aa75b.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bed49be6.js",
+    "static/js/2.216c1ef3.chunk.js",
+    "static/css/main.4f1cf6e5.chunk.css",
+    "static/js/main.cf50f9b7.chunk.js"
+  ]
+}
