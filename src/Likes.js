@@ -8,6 +8,7 @@ class Likes extends React.Component {
         this.state={
             votes: [{}]
         };
+        this.getVotes = this.getVotes.bind(this);
     };
 
     componentDidMount() {
@@ -35,7 +36,7 @@ class Likes extends React.Component {
         let likedImg = this.state.votes.filter((img) => img.value == 1).reverse();
         return(
             <div className="right likes">
-                <NavBar />
+                <NavBar handlerSearch={this.props.handlerSearch} />
                 <div className="frame">
                     <div className="frame_bar">
                         <div className="breadcrumbs">

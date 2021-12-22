@@ -8,6 +8,7 @@ import Home from './Home';
 import Likes from './Likes';
 import Favourites from './Favourites';
 import Dislikes from './Dislikes';
+import Search from './Search';
 import {Routes, Route, NavLink} from "react-router-dom";
 
 class Main extends React.Component {
@@ -15,12 +16,18 @@ class Main extends React.Component {
         super(props);
         this.state = {
             currentBreed: '',
+            searchWord: ''
         }
-        this.setCurrentBreed =  this.setCurrentBreed.bind(this)
+        this.setCurrentBreed = this.setCurrentBreed.bind(this)
+        this.handlerSearch = this.handlerSearch.bind(this)
     }
     setCurrentBreed(value) {
 		this.setState({currentBreed:value})
 	}
+    handlerSearch(e){
+        this.setState({searchWord: e.target.value})
+        console.log(this.state.searchWord)
+    }
     render() {
         return(
             <div className="container">
@@ -56,13 +63,14 @@ class Main extends React.Component {
                 <div>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/voting" element={<Voting />} />
-                        <Route path="/breeds" element={<Breeds setCurrentBreed={this.setCurrentBreed} />} />
-                        <Route path="/breed" element={<Breed currentBreed={this.state.currentBreed}/>} />
-                        <Route path="/gallery" element={<Gallery modalOpen={this.props.modalOpen} />} />
-                        <Route path="/likes" element={<Likes />} />
-                        <Route path="/favourites" element={<Favourites />} />
-                        <Route path="/dislikes" element={<Dislikes />} />
+                        <Route path="/voting" element={<Voting handlerSearch={this.handlerSearch} /> } />
+                        <Route path="/breeds" element={<Breeds handlerSearch={this.handlerSearch} setCurrentBreed={this.setCurrentBreed} />} />
+                        <Route path="/breed" element={<Breed handlerSearch={this.handlerSearch} currentBreed={this.state.currentBreed}/>} />
+                        <Route path="/gallery" element={<Gallery handlerSearch={this.handlerSearch} modalOpen={this.props.modalOpen} />} />
+                        <Route path="/likes" element={<Likes handlerSearch={this.handlerSearch} />} />
+                        <Route path="/favourites" element={<Favourites handlerSearch={this.handlerSearch} />} />
+                        <Route path="/dislikes" element={<Dislikes handlerSearch={this.handlerSearch} />} />
+                        <Route path="/search" element={<Search handlerSearch={this.handlerSearch} searchWord={this.state.searchWord} />} />
                     </Routes>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import test_img_3 from './img/test_img_3.jpg';
 import success from './img/success.svg';
 import error from './img/error.svg';
 import Dropzone from 'react-dropzone';
+import DropzoneModal from './DropzoneModal';
 
 class Modal extends React.Component {
     constructor(props) {
@@ -26,11 +27,7 @@ class Modal extends React.Component {
                             <button onClick={this.props.modalClose} className="modal_close"></button>
                             <p className="modal_title">Upload a .jpg or .png Dog Image</p>
                             <p className="modal_subtitle">Any uploads must comply with the <a href="https://www.thedogapi.com/privacy">upload guidelines</a> or face deletion.</p>
-                            <div className="modal_img_up_wrapp">
-                                <div className="modal_img_up_placeholder"></div>
-                                <p className="modal_img_up_text"><span>Drag here</span> your file or <span>Click here</span> to upload</p>
-                            </div>
-                            <p className="modal_nfs">No file selected</p>
+                            <DropzoneModal />
                         </div>
 
                         {/* <div className="modal">

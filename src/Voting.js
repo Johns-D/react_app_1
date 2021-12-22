@@ -141,7 +141,7 @@ class Voting extends React.Component {
         data = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         return(
                 <div className="right voting">
-                    <NavBar />
+                    <NavBar handlerSearch={this.props.handlerSearch} />
                     <div className="frame">
                         <div className="frame_bar">
                             <div className="breadcrumbs">

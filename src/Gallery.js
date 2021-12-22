@@ -74,7 +74,7 @@ class Gallery extends React.Component {
     render() {
         return(
             <div className="right gallery">
-                <NavBar />
+                <NavBar handlerSearch={this.props.handlerSearch} />
                 <div className="frame">
                     <div className="frame_bar">
                         <div className="breadcrumbs">

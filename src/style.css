@@ -342,7 +342,6 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 156px;
     height: 40px;
     background-color: #FF868E;
     border-radius: 10px;
@@ -351,6 +350,7 @@ button {
     font-weight: 500;
     letter-spacing: 2px;
     color: #FFFFFF;
+    padding: 0 30px;
 }
 
 .upload_btn {
@@ -613,10 +613,6 @@ button {
 
 /* breeds */
 
-.right.breeds .current {
-    width: 143px;
-}
-
 .breeds_form {
     display: flex;
 }
@@ -721,7 +717,6 @@ button {
 /* breed */
 
 .breed .current {
-    width: 143px;
     background-color: #FBE0DC;
     color: #FF868E;
 }
@@ -764,6 +759,7 @@ button {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    border-radius: 20px;
 }
 
 .nav_btns {
@@ -806,7 +802,6 @@ button {
     flex: 1 0 100%;
     width: 640px;
     height: 360px;
-    border-radius: 20px;
     overflow: hidden;
 }
 
@@ -838,13 +833,18 @@ button {
     padding: 26px 40px 0 40px;
 }
 
-.breed_info_name {
+.breed_info_name_wrapp {
+    display: flex;
+    justify-content: center;
     position: absolute;
-    width: 193px;
+    width: 100%;
     height: 62px;
     left: 50%;
     top: -30px;
     transform: translate(-50%);
+}
+
+.breed_info_name {
     background: #FFFFFF;
     border-radius: 20px;
     font-size: 36px;
@@ -852,6 +852,7 @@ button {
     font-weight: 500;
     color: #1D1D1D;
     text-align: center;
+    padding: 0 20px;
 }
 
 .breed_info_bred_for {
@@ -913,10 +914,6 @@ button {
 }
 
 /* voting */
-
-.right.voting .current {
-    width: 146px;
-}
 
 .voting_card {
     margin-top: 20px;
@@ -1090,10 +1087,6 @@ button {
 
 /* search */
 
-.search .current {
-    width: 148px;
-}
-
 .search_results_text {
     font-size: 20px;
     line-height: 29px;
@@ -1114,10 +1107,6 @@ button {
     background-image: url(img/favourite_active.svg);
 }
 
-.favourites .current {
-    width: 192px;
-}
-
 .favourites .img_pattern_item_favourite_btn {
     background-image: url(img/added_favourite_on_img.svg);
 }
@@ -1133,19 +1122,11 @@ button {
     background-image: url(img/like_active.svg);
 }
 
-.likes .current {
-    width: 119px;
-}
-
 /* dislikes */
 
 .dislikes_btn.active {
     background-color: #FF868E;
     background-image: url(img/dislike_active.svg);
-}
-
-.dislikes .current {
-    width: 156px;
 }
 
 /* defaultstate */
@@ -1274,6 +1255,9 @@ button {
     width: 640px;
     height: 320px;
     background-color: #FFFFFF;
+    background-image: url(img/img_placeholder.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
     border: 2px dashed #FBE0DC;
     border-radius: 20px;
     box-sizing: border-box;
@@ -1281,17 +1265,8 @@ button {
 }
 
 .modal_img_up_wrapp_error {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 640px;
-    height: 320px;
     background: #FBE0DC;
     border: 2px dashed #FF868E;
-    border-radius: 20px;
-    box-sizing: border-box;
-    margin-top: 40px;
 }
 
 .modal_img_up_placeholder {
@@ -1331,6 +1306,7 @@ button {
 }
 
 .modal_img_up_img  {
+    position: absolute;
     width: 558px;
     height: 280px;
     border-radius: 10px;

@@ -49,7 +49,7 @@ class Breed extends React.Component {
         })
     }
     getBreedImg(){
-        let url = `https://api.thedogapi.com/v1/images/search?limit=6&breed_id=${this.state.breedInfo.id}`
+        let url = `https://api.thedogapi.com/v1/images/search?limit=5&breed_id=${this.state.breedInfo.id}`
         console.log(this.state.breedInfo)
         console.log(url)
         fetch(url,{
@@ -69,7 +69,7 @@ class Breed extends React.Component {
         console.log(this.state)
         return(
             <div className="right breed">
-                <NavBar />
+                <NavBar handlerSearch={this.props.handlerSearch} />
                 <div className="frame">
                     <div className="frame_bar">
                         <div className="breadcrumbs">
@@ -82,7 +82,9 @@ class Breed extends React.Component {
                         <Slider breedImg={this.state.breedImg} />
                     </div>
                     <div className="breed_info">
-                        <p className="breed_info_name">{this.state.breedInfo.name}</p>
+                        <div className="breed_info_name_wrapp">
+                            <p className="breed_info_name">{this.state.breedInfo.name}</p>
+                        </div>
                         <p className="breed_info_bred_for">{this.state.breedInfo.bread_for}</p>
                         <div className="breed_info_in_wrapp_1">
                             <div className="breed_info_temperament_wrapp">

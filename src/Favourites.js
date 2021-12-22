@@ -5,7 +5,7 @@ class Favourites extends React.Component {
     render() {
         return(
             <div className="right favourites">
-                <NavBar />
+                <NavBar handlerSearch={this.props.handlerSearch} />
                 <div className="frame">
                     <div className="frame_bar">
                         <div className="breadcrumbs">
